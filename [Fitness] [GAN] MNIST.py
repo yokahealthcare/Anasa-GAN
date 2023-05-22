@@ -42,7 +42,7 @@ lr = 3e-4  # the best learning rate for Adam optimizer according to Andrej Karpa
 z_dim = 64 # 128, 256
 image_dim = 28 * 28 * 1 # 784
 batch_size = 32
-num_epochs = 50
+num_epochs = 150
 
 disc = Discriminator(image_dim).to(device)
 gen = Generator(z_dim, image_dim).to(device)
