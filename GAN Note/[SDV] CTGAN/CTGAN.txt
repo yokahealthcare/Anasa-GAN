@@ -9,9 +9,17 @@ LOSS	: 1104.92%
 ACC 	: 5.50%
 LOSS	: 1114.79%
 
-....
+- 300 epochs
+ACC 	: 17.50%
+LOSS	: 1124.04%
 
+- 400 epochs
+ACC 	: 6.40%
+LOSS	: 1109.74%
 
+- 500 epochs
+ACC 	: 8.10%
+LOSS	: 1043.96%
 
 ---------- ARGUMENTS
 metadata (sdv.metadata.SingleTableMetadata):
