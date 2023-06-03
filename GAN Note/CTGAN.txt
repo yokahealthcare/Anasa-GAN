@@ -1,0 +1,6 @@
+CTGAN
+1000 samples generated
+
+- 100 epochs
+ACC 	: 11.30%
+LOSS	: 1104.92%
