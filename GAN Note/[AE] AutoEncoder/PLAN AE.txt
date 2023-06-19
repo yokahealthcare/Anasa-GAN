@@ -1,0 +1,73 @@
+==================================
+normal        19060
+quick          2667
+hold           2133
+deep           1066
+deep_quick      800
+Name: labels, dtype: int64
+==================================
+
+
+## UPPERSAMPLING ##
+LABELS:
+normal        19060 + 0 	= 19060
+quick          2667 + 16393 	= 19060
+hold           2133 + 16927 	= 19060
+deep           1066 + 17994 	= 19060
+deep_quick      800 + 18260 	= 19060
+==================================
+
+STRATEGY:
+1. Pipeline + GridSearchCV Each One Label (original size)
+2. Pipeline + GridSearchCV Each One Label (augmented UP by 0.01)
+3. Pipeline + GridSearchCV Each One Label (augmented DOWN by 0.01)
+4. Pipeline + GridSearchCV Each One Label (augmented UP & DOWN by 0.01)
+
+WHAT TO STORE:
+1. Model files Each One (.pkl, .h5)
+2. Loss & Accuracy (tentative)
+3. Good Hyperparameters
+
+ACRHITECTURE : CPU
+	- we strongly suggested using CPU for training architecture, because the dataset we dealing with is small enough that is not worth it using GPU.
+
+METHOD : Pipeline & GridSearchCV
+
+METHOD #1 : Pipeline
+....................................
+
+METHOD #2 : GridSearchCV
+Suggested Parameters:
+	## STANDARD-PARAMETERS ##
+	- optimizer (Adam)
+	- epochs (15, 20)
+	- batch_size (16, 32, 64)
+	- drop-out rate (0.2, 0.3)
+	
+	## HYPER-PARAMETERS ##
+	Network Weight Initialization (['glorot_uniform', 'he_uniform'])
+	Recurrent Initializer (['glorot_uniform', 'orthogonal'])
+	Neurons ([30, 60])
+
+	
+## REASON ##
+# [batch_size]
+general rule of thumb that is often recommended in the deep learning community based on practical experience with different datasets and models.
+
+
+# [Network Weight Intialization]
+Glorot initialization, also known as Xavier initialization, was introduced in the paper "Understanding the difficulty of training deep feedforward neural networks" by Glorot and Bengio (2010). This method scales the weight initialization based on the number of input and output units of each layer, aiming to keep the variance of the activations and gradients roughly the same across different layers.
+
+He initialization, introduced in the paper "Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification" by He et al. (2015), is a modification of Glorot initialization that works better for networks that use rectified linear units (ReLU) as activation functions. This method scales the initialization based only on the number of input units, and is designed to avoid the vanishing gradient problem that can occur with deep networks.
+
+Reference:
+
+Glorot, X., & Bengio, Y. (2010). Understanding the difficulty of training deep feedforward neural networks. Proceedings of the Thirteenth International Conference on Artificial Intelligence and Statistics, 9-16.
+
+He, K., Zhang, X., Ren, S., & Sun, J. (2015). Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification. Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 1-9.
+
+# Recurrent Initializer
+...............
+
+# Neurons
+...............
