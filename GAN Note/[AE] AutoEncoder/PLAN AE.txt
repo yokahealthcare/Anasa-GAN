@@ -18,10 +18,10 @@ deep_quick      800 + 18260 	= 19060
 ==================================
 
 STRATEGY:
-1. Pipeline + GridSearchCV Each One Label (original size)
-2. Pipeline + GridSearchCV Each One Label (augmented UP by 0.01)
-3. Pipeline + GridSearchCV Each One Label (augmented DOWN by 0.01)
-4. Pipeline + GridSearchCV Each One Label (augmented UP & DOWN by 0.01)
+1. GridSearchCV Each One Label (original size)
+2. GridSearchCV Each One Label (augmented UP by 0.01)
+3. GridSearchCV Each One Label (augmented DOWN by 0.01)
+4. GridSearchCV Each One Label (augmented UP & DOWN by 0.01)
 
 *choose which one resulted better
 ** create new data with those model according to numeric value above
@@ -35,30 +35,7 @@ WHAT TO STORE:
 ACRHITECTURE : CPU
 	- we strongly suggested using CPU for training architecture, because the dataset we dealing with is small enough that is not worth it using GPU.
 
-METHOD : Pipeline & GridSearchCV
-
-METHOD #1 : Pipeline
-from  sklearn.preprocessing import StandardScaler, MinMaxScaler, FunctionTransformer
-
-std_scaler = StandardScaler().fit(X)
-min_max_scaler = MinMaxScaler().fit(X)
-
-def preprocessor(X, Y, x_type="StandardScaler"):
-	# encode class values as integers [0,0,0,0,0,0,0,1,1,1,1,1,2,2,2,2]
-	encoder = LabelEncoder()
-	encoder.fit(Y)
-	encoded_Y = encoder.transform(Y)
-
-	# convert integers to dummy variables (i.e. one hot encoded)
-	hot_y = np_utils.to_categorical(encoded_Y)
-
-	A = None
-	if x_type == "StandardScaler":
-		A = std_scaler.transform(X)
-	elif x_type == "MinMaxScaler":
-		A = min_max_scaler.transform(X)
-	
-	return A, hot_y
+METHOD : GridSearchCV
 
 METHOD #2 : GridSearchCV
 Suggested Parameters:
